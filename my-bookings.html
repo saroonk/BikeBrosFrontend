@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BikeBros - My Bookings</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="style.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        /* Mobile specific styles */
+        .mobile-search-wrapper {
+            position: relative;
+        }
+
+        .mobile-search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+
+        .mobile-search-input {
+            padding-left: 40px;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+            background-color: #fff;
+        }
+
+        .mobile-pills-scroll {
+            overflow-x: auto;
+            white-space: nowrap;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .mobile-pills-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .mobile-pill {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-right: 8px;
+            border: 1px solid #e9ecef;
+            background-color: #fff;
+            color: #495057;
+            text-decoration: none;
+        }
+
+        .mobile-pill.active {
+            background-color: #212529;
+            color: #fff;
+            border-color: #212529;
+        }
+
+        .mobile-booking-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+            border: 1px solid #f1f3f5;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+        }
+
+        .mobile-booking-card.highlight {
+            border: 1.5px solid #ffc107;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.1);
+        }
+
+        .mobile-status-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        /* Desktop specific styles */
+        .desktop-filter-bar {
+            background: #fff;
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.02);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .desktop-search-input {
+            border: none;
+            background: transparent;
+            width: 250px;
+        }
+
+        .desktop-search-input:focus {
+            box-shadow: none;
+            outline: none;
+        }
+
+        .desktop-pill {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #495057;
+            text-decoration: none;
+            border: 1px solid transparent;
+        }
+
+        .desktop-pill.active {
+            background-color: #ffc107;
+            color: #212529;
+            font-weight: 600;
+        }
+
+        .desktop-pill.bordered {
+            border: 1px solid #e9ecef;
+        }
+
+        /* Tracker line */
+        .status-tracker {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .status-tracker::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 5%;
+            right: 5%;
+            height: 2px;
+            background-color: #e9ecef;
+            z-index: 1;
+        }
+
+        .status-tracker-line-active {
+            position: absolute;
+            top: 10px;
+            left: 5%;
+            width: 65%;
+            /* Adjsut based on active step */
+            height: 2px;
+            background-color: #ffc107;
+            z-index: 2;
+        }
+
+        .status-step {
+            position: relative;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 25%;
+        }
+
+        .status-dot {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background-color: #fff;
+            border: 2px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
+
+        .status-dot.completed {
+            background-color: #ffc107;
+            border-color: #ffc107;
+            color: #fff;
+        }
+
+        .status-dot.active {
+            border-color: #ffc107;
+        }
+
+        .status-dot.active::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background-color: #ffc107;
+            border-radius: 50%;
+        }
+
+        .status-label {
+            font-size: 0.8rem;
+            color: #6c757d;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .status-label.active {
+            color: #212529;
+            font-weight: 700;
+        }
+
+        .desktop-list-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 1px solid #f1f3f5;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+            transition: all 0.2s;
+        }
+
+        .desktop-list-card:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .desktop-list-card.highlight-left {
+            border-left: 3px solid #ffc107;
+        }
+
+        /* Tag styles */
+        .tag-pending {
+            border: 1px solid #ffc107;
+            color: #b08d00;
+            background: #fffcf0;
+        }
+
+        .tag-inprogress {
+            background: #ffc107;
+            color: #212529;
+        }
+
+        .tag-completed {
+            background: #d1f2e5;
+            color: #1e7e5a;
+        }
+
+        .tag-completed-gray {
+            background: #f1f3f5;
+            color: #495057;
+        }
+
+        .tag-cancelled {
+            background: #ffe3e3;
+            color: #c92a2a;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================== -->
+    <!-- DESKTOP VIEW (Hidden on lg-down)               -->
+    <!-- ============================================== -->
+    <div class="d-none d-lg-block desktop-wrapper d-flex flex-column min-vh-100">
+        <!-- Desktop Navbar -->
+        <nav class="navbar navbar-expand-lg bg-white desktop-navbar py-3 sticky-top shadow-sm border-bottom">
+            <div class="container">
+                <a class="navbar-brand fw-bold fs-3 fst-italic text-dark mb-0" style="letter-spacing:-1px;"
+                    href="index.html">BikeBros</a>
+
+                <div class="collapse navbar-collapse justify-content-center">
+                    <ul class="navbar-nav gap-5 bg-white">
+                        <li class="nav-item">
+                            <a class="nav-link fw-medium text-secondary desktop-nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-medium text-secondary desktop-nav-link"
+                                href="service.html">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active fw-bold text-dark desktop-nav-link active-link" href="#">My
+                                Bookings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-medium text-secondary desktop-nav-link"
+                                href="contact.html">Support</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="d-flex align-items-center gap-4">
+                    <button class="btn btn-warning fw-bold px-4 py-2 rounded-3 text-dark">Book Service</button>
+                    <!-- Profile Icon -->
+                    <a href="profiles.html" class="profile-circle" style="cursor: pointer;">
+                        <img src="https://i.pravatar.cc/150?img=11" alt="Profile">
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Desktop Main Content -->
+        <div class="container py-5 flex-grow-1">
+            <!-- Header -->
+            <div class="mb-4">
+                <h1 class="fw-bold mb-1 fs-1 text-dark">My Bookings</h1>
+                <p class="text-secondary fw-medium">Track and manage your service requests</p>
+            </div>
+
+            <!-- Filter Bar -->
+            <div class="desktop-filter-bar mb-5">
+                <div class="d-flex align-items-center ps-2 pe-4 border-end">
+                    <i class="bi bi-search text-secondary me-2"></i>
+                    <input type="text" class="desktop-search-input" placeholder="Search by service or booking ID">
+                </div>
+                <div class="d-flex gap-2">
+                    <a href="#" class="desktop-pill active">All</a>
+                    <a href="#" class="desktop-pill bordered bg-white">Pending</a>
+                    <a href="#" class="desktop-pill bordered bg-white">In Progress</a>
+                    <a href="#" class="desktop-pill bordered bg-white">Completed</a>
+                    <a href="#" class="desktop-pill bordered bg-white">Cancelled</a>
+                </div>
+            </div>
+
+            <!-- Grid Content -->
+            <div class="row g-5">
+                <!-- Left Column (Active Booking) -->
+                <div class="col-lg-7">
+                    <div class="card border-0 shadow-sm rounded-4 p-5 bg-white h-100">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div>
+                                <div class="d-flex align-items-center gap-2 mb-3">
+                                    <span class="mobile-status-tag tag-pending text-uppercase px-2"
+                                        style="font-size: 0.7rem; letter-spacing: 0.5px;">IN PROGRESS</span>
+                                    <span class="text-secondary"
+                                        style="font-size: 0.85rem; font-weight: 500;">#BB-1024</span>
+                                </div>
+                                <h2 class="fw-bold fs-2 mb-0 text-dark">Repair & Service</h2>
+                            </div>
+                            <div class="rounded-circle overflow-hidden shadow-sm flex-shrink-0"
+                                style="width: 45px; height: 45px;">
+                                <img src="images/image.png" alt="YV Image"
+                                    style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                        </div>
+
+                        <!-- Info Box -->
+                        <div class="bg-light rounded-3 p-4 mt-4 mb-4" style="background-color: #f8f9fa !important;">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="text-warning mb-1 d-flex align-items-center gap-1"
+                                        style="font-size: 0.85rem;">
+                                        <i class="bi bi-calendar-event"></i>
+                                        <span>Date</span>
+                                    </div>
+                                    <div class="fw-bold text-dark" style="font-size: 0.95rem;">12 Nov 2024</div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-warning mb-1 d-flex align-items-center gap-1"
+                                        style="font-size: 0.85rem;">
+                                        <i class="bi bi-clock"></i>
+                                        <span>Time Slot</span>
+                                    </div>
+                                    <div class="fw-bold text-dark" style="font-size: 0.95rem;">10:00 AM - 1:00 PM</div>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <div class="text-warning mb-1 d-flex align-items-center gap-1"
+                                    style="font-size: 0.85rem;">
+                                    <i class="bi bi-geo-alt"></i>
+                                    <span>Location</span>
+                                </div>
+                                <div class="fw-bold text-dark" style="font-size: 0.95rem;">123 Cycling Blvd, Downtown
+                                    District</div>
+                            </div>
+                        </div>
+
+                        <!-- Status Tracker -->
+                        <div class="mt-4 pt-2 mb-5">
+                            <span class="text-secondary" style="font-size: 0.85rem;">Status Tracker</span>
+                            <div class="status-tracker">
+                                <div class="status-tracker-line-active" style="width: 66%;"></div>
+
+                                <div class="status-step">
+                                    <div class="status-dot completed"><i class="bi bi-check"
+                                            style="font-size: 1.2rem; transform: scale(1.4);"></i></div>
+                                    <div class="status-label">Requested</div>
+                                </div>
+                                <div class="status-step">
+                                    <div class="status-dot completed"><i class="bi bi-check"
+                                            style="font-size: 1.2rem; transform: scale(1.4);"></i></div>
+                                    <div class="status-label">Accepted</div>
+                                </div>
+                                <div class="status-step">
+                                    <div class="status-dot active"></div>
+                                    <div class="status-label active">In<br>Progress</div>
+                                </div>
+                                <div class="status-step">
+                                    <div class="status-dot"></div>
+                                    <div class="status-label">Completed</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="d-flex gap-3">
+                            <button class="btn btn-warning py-3 fw-bold rounded-3 text-dark flex-grow-1 border-0">View
+                                Details</button>
+                            <button class="btn btn-white bg-white border py-3 px-4 fw-bold rounded-3 text-dark">Contact
+                                Tech</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column (List) -->
+                <div class="col-lg-5">
+                    <h5 class="fw-bold mb-4 fs-5">Upcoming & Past</h5>
+
+                    <!-- Item 1 -->
+                    <div class="desktop-list-card highlight-left">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <span class="text-secondary" style="font-size: 0.8rem; font-weight: 500;">#BB-1030</span>
+                            <span class="mobile-status-tag tag-pending text-uppercase px-2"
+                                style="font-size: 0.65rem; letter-spacing: 0.5px;">PENDING</span>
+                        </div>
+                        <h6 class="fw-bold mb-3 fs-5">Pro Tune-Up</h6>
+                        <div class="d-flex align-items-center gap-3 mb-4">
+                            <div class="d-flex align-items-center gap-1 text-secondary" style="font-size: 0.85rem;">
+                                <i class="bi bi-calendar-event text-warning"></i> 15 Nov
+                            </div>
+                            <div class="d-flex align-items-center gap-1 text-secondary" style="font-size: 0.85rem;">
+                                <i class="bi bi-clock text-warning"></i> 09:00 AM
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-warning py-2 fw-bold text-dark rounded-2 flex-grow-1"
+                                style="font-size: 0.85rem;">View Details</button>
+                            <button class="btn bg-white border py-2 fw-bold text-dark rounded-2 px-3"
+                                style="font-size: 0.85rem;">Reschedule</button>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="desktop-list-card">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <span class="text-secondary" style="font-size: 0.8rem; font-weight: 500;">#BB-0992</span>
+                            <span class="mobile-status-tag tag-completed text-uppercase px-2"
+                                style="font-size: 0.65rem; letter-spacing: 0.5px;">COMPLETED</span>
+                        </div>
+                        <h6 class="fw-bold mb-3 fs-5">Flat Tire Fix</h6>
+                        <div class="d-flex align-items-center gap-3 mb-4">
+                            <div class="d-flex align-items-center gap-1 text-secondary" style="font-size: 0.85rem;">
+                                <i class="bi bi-calendar-event text-warning"></i> 01 Nov
+                            </div>
+                            <div class="d-flex align-items-center gap-1 text-secondary" style="font-size: 0.85rem;">
+                                <i class="bi bi-clock text-warning"></i> 14:00 PM
+                            </div>
+                        </div>
+                        <button class="btn bg-white border py-2 fw-bold text-dark rounded-2 w-100"
+                            style="font-size: 0.85rem;">View Invoice</button>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="desktop-list-card">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <span class="text-secondary" style="font-size: 0.8rem; font-weight: 500;">#BB-0985</span>
+                            <span class="mobile-status-tag tag-cancelled text-uppercase px-2"
+                                style="font-size: 0.65rem; letter-spacing: 0.5px;">CANCELLED</span>
+                        </div>
+                        <h6 class="fw-bold mb-3 fs-5">Custom Build Consult</h6>
+                        <div class="d-flex align-items-center gap-3 mb-1">
+                            <div class="d-flex align-items-center gap-1 text-secondary" style="font-size: 0.85rem;">
+                                <i class="bi bi-calendar-event text-warning"></i> 28 Oct
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Desktop Footer -->
+        <footer class="bg-white border-top py-4 mt-auto">
+            <div class="container d-flex justify-content-between align-items-center text-muted"
+                style="font-size:0.85rem;">
+                <div class="fw-bold fs-5 text-dark fst-italic">BikeBros</div>
+                <div>© 2024 BIKEBROS PERFORMANCE. ALL RIGHTS RESERVED.</div>
+                <div class="d-flex gap-5">
+                    <a href="#" class="text-secondary text-decoration-none fw-bold tracking-wide">CONTACT</a>
+                    <a href="#" class="text-secondary text-decoration-none fw-bold tracking-wide">PRIVACY</a>
+                    <a href="#" class="text-secondary text-decoration-none fw-bold tracking-wide">TERMS</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+    <!-- ============================================== -->
+    <!-- MOBILE VIEW (Visible on lg-down only)          -->
+    <!-- ============================================== -->
+    <div class="d-block d-lg-none mobile-wrapper pb-5 mb-5 min-vh-100">
+
+        <!-- Mobile Top Navbar -->
+        <div class="d-flex justify-content-between align-items-center p-3 bg-white position-sticky top-0 shadow-sm z-2">
+            <button class="btn p-0 border-0 text-dark" onclick="history.back()">
+                <i class="bi bi-arrow-left fs-4 fw-bold"></i>
+            </button>
+            <h5 class="fw-bold m-0 fs-5 text-dark">My Bookings</h5>
+            <button class="btn p-0 border-0 text-dark">
+                <i class="bi bi-three-dots-vertical fs-5"></i>
+            </button>
+        </div>
+
+        <!-- Search and Filter Bar -->
+        <div class="bg-white px-3 pb-3 pt-3 border-bottom border-light">
+            <div class="mobile-search-wrapper mb-3">
+                <i class="bi bi-search mobile-search-icon"></i>
+                <input type="text" class="form-control mobile-search-input py-2" placeholder="Search by service or ID">
+            </div>
+
+            <div class="mobile-pills-scroll pb-1">
+                <a href="#" class="mobile-pill active">All</a>
+                <a href="#" class="mobile-pill">Pending</a>
+                <a href="#" class="mobile-pill">In Progress</a>
+                <a href="#" class="mobile-pill">Completed</a>
+            </div>
+        </div>
+
+        <!-- Mobile Main Content -->
+        <div class="px-3 py-3 mt-1">
+
+            <!-- Card 1 -->
+            <div class="mobile-booking-card">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <div>
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <span class="mobile-status-tag tag-pending">Pending</span>
+                            <span class="text-secondary" style="font-size: 0.75rem;">ID: #BK-8492</span>
+                        </div>
+                        <h6 class="fw-bold fs-6 mb-0 text-dark">Full Synthetic Oil Change</h6>
+                    </div>
+                    <div class="bg-light rounded-3 d-flex align-items-center justify-content-center"
+                        style="width: 40px; height: 40px;">
+                        <i class="bi bi-receipt fs-5 text-warning"></i>
+                    </div>
+                </div>
+
+                <div class="border-top border-bottom py-3 mb-3 border-light">
+                    <div class="d-flex flex-column gap-2">
+                        <div class="d-flex align-items-center gap-2 text-secondary" style="font-size: 0.85rem;">
+                            <i class="bi bi-calendar"></i> Tomorrow, 10:00 AM - 11:30 AM
+                        </div>
+                        <div class="d-flex align-items-center gap-2 text-secondary" style="font-size: 0.85rem;">
+                            <i class="bi bi-geo-alt"></i> 123 Main St, Office Garage
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button class="btn btn-warning py-2 fw-bold text-dark rounded-3 flex-grow-1"
+                        style="font-size: 0.9rem;">View Details</button>
+                    <button
+                        class="btn bg-white border py-2 fw-bold text-dark rounded-3 flex-grow-1 border-secondary border-opacity-25"
+                        style="font-size: 0.9rem;">Reschedule</button>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="mobile-booking-card highlight">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <div>
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <span class="mobile-status-tag tag-inprogress">In Progress</span>
+                            <span class="text-secondary" style="font-size: 0.75rem;">ID: #BK-8491</span>
+                        </div>
+                        <h6 class="fw-bold fs-6 mb-0 text-dark">Brake Pad Replacement</h6>
+                    </div>
+                    <div class="bg-light rounded-3 d-flex align-items-center justify-content-center"
+                        style="width: 40px; height: 40px;">
+                        <i class="bi bi-wrench fs-5 text-warning"></i>
+                    </div>
+                </div>
+
+                <div class="border-top border-bottom py-3 mb-3 border-light">
+                    <div class="d-flex flex-column gap-2">
+                        <div class="d-flex align-items-center gap-2 text-secondary" style="font-size: 0.85rem;">
+                            <i class="bi bi-calendar"></i> Today, 2:00 PM - 4:00 PM
+                        </div>
+                        <div class="d-flex align-items-center gap-2 text-secondary" style="font-size: 0.85rem;">
+                            <i class="bi bi-geo-alt"></i> Current Location: Tech Park West
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-warning py-2 fw-bold text-dark rounded-3 w-100" style="font-size: 0.9rem;">Track
+                    Mechanic</button>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="mobile-booking-card">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <div>
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <span class="mobile-status-tag tag-completed-gray">Completed</span>
+                            <span class="text-secondary" style="font-size: 0.75rem;">ID: #BK-8480</span>
+                        </div>
+                        <h6 class="fw-bold fs-6 mb-0 text-dark" style="max-width: 200px; line-height: 1.3;">Annual
+                            Inspection & Tune-up</h6>
+                    </div>
+                    <div class="bg-light rounded-3 d-flex align-items-center justify-content-center flex-shrink-0"
+                        style="width: 40px; height: 40px;">
+                        <i class="bi bi-check-circle fs-5 text-warning"></i>
+                    </div>
+                </div>
+
+                <div class="border-top border-bottom py-3 mb-3 border-light">
+                    <div class="d-flex flex-column gap-2">
+                        <div class="d-flex align-items-center gap-2 text-secondary" style="font-size: 0.85rem;">
+                            <i class="bi bi-calendar"></i> Oct 12, 2023
+                        </div>
+                        <div class="d-flex align-items-center gap-2 text-secondary" style="font-size: 0.85rem;">
+                            <i class="bi bi-geo-alt"></i> Home Driveway
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button
+                        class="btn bg-white border py-2 fw-bold text-dark rounded-3 flex-grow-1 border-secondary border-opacity-25"
+                        style="font-size: 0.9rem;">View Receipt</button>
+                    <button class="btn btn-warning py-2 fw-bold text-dark rounded-3 flex-grow-1"
+                        style="font-size: 0.9rem;">Rebook</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Mobile Bottom Navbar -->
+        <div
+            class="bg-white border-top position-fixed bottom-0 w-100 z-3 d-flex justify-content-around py-2 pt-3 shadow-lg">
+            <div class="nav-item d-flex flex-column align-items-center text-secondary opacity-75"
+                style="cursor:pointer;" onclick="window.location.href='index.html'">
+                <div class="px-3 py-1 mb-1">
+                    <i class="bi bi-house-door fs-5"></i>
+                </div>
+                <span class="tracking-wide" style="font-size:0.6rem; font-weight:700;">HOME</span>
+            </div>
+            <div class="nav-item d-flex flex-column align-items-center text-secondary opacity-75"
+                style="cursor:pointer;" onclick="window.location.href='service.html'">
+                <div class="px-3 py-1 mb-1">
+                    <i class="bi bi-bicycle fs-5"></i>
+                </div>
+                <span class="tracking-wide" style="font-size:0.6rem; font-weight:700;">SERVICES</span>
+            </div>
+            <!-- Active Bookings Tab -->
+            <div class="nav-item d-flex flex-column align-items-center mobile-nav-active" onclick="window.location.href='my-bookings.html'" style="cursor:pointer;">
+                <div class="px-3 py-1 mb-1">
+                    <i class="bi bi-calendar4-week fs-5"></i>
+                </div>
+                <span class="tracking-wide" onclick="window.location.href='my-bookings.html'" style="font-size:0.6rem; font-weight:800;">BOOKINGS</span>
+            </div>
+            <div class="nav-item d-flex flex-column align-items-center text-secondary opacity-75"
+                style="cursor:pointer;" onclick="window.location.href='contact.html'">
+                <div class="px-3 py-1 mb-1">
+                    <i class="bi bi-question-circle fs-5"></i>
+                </div>
+                <span class="tracking-wide" style="font-size:0.6rem; font-weight:700;">SUPPORT</span>
+            </div>
+            <div class="nav-item d-flex flex-column align-items-center text-secondary opacity-75"
+                onclick="window.location.href='profiles.html'" style="cursor:pointer;">
+                <div class="px-3 py-1 mb-1">
+                    <i class="bi bi-person fs-5"></i>
+                </div>
+                <span class="tracking-wide" onclick="window.location.href='profiles.html'" style="font-size:0.6rem; font-weight:700;">PROFILE</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Desktop Filter Pills
+            const desktopPills = document.querySelectorAll('.desktop-pill');
+            desktopPills.forEach(pill => {
+                pill.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    desktopPills.forEach(p => {
+                        p.classList.remove('active');
+                        p.classList.add('bordered', 'bg-white');
+                    });
+                    pill.classList.remove('bordered', 'bg-white');
+                    pill.classList.add('active');
+                });
+            });
+
+            // Mobile Filter Pills
+            const mobilePills = document.querySelectorAll('.mobile-pill');
+            mobilePills.forEach(pill => {
+                pill.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    mobilePills.forEach(p => p.classList.remove('active'));
+                    pill.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
