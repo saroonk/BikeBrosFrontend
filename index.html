@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BikeBros - Select a Service</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ============================================== -->
+    <!-- DESKTOP VIEW (Hidden on lg-down)               -->
+    <!-- ============================================== -->
+    <div class="d-none d-lg-block desktop-wrapper">
+        <!-- Desktop Navbar -->
+        <nav class="navbar navbar-expand-lg bg-white desktop-navbar py-3 sticky-top shadow-sm border-bottom">
+            <div class="container">
+                <a class="navbar-brand fw-bold fs-3 fst-italic text-dark mb-0" style="letter-spacing:-1px;" href="#">BikeBros</a>
+                
+                <div class="collapse navbar-collapse justify-content-center">
+                    <ul class="navbar-nav gap-5 bg-white">
+                        <li class="nav-item">
+                            <a class="nav-link active fw-bold text-dark desktop-nav-link active-link" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-medium text-secondary desktop-nav-link" href="#">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-medium text-secondary desktop-nav-link" href="#">My Bookings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-medium text-secondary desktop-nav-link" href="#">Support</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="d-flex align-items-center gap-4">
+                    <button class="btn btn-warning fw-bold px-4 py-2 rounded-3 text-dark">Book Service</button>
+                    <!-- Profile Icon -->
+                    <div class="profile-circle" style="cursor: pointer;">
+                        <img src="https://i.pravatar.cc/150?img=11" alt="Profile">
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Desktop Main Content -->
+        <div class="container py-5">
+            <h1 class="fw-bold mb-2">Select a Service</h1>
+            <p class="text-secondary fs-5 mb-5 pb-2">Quick doorstep service for your bike</p>
+
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                
+                <!-- Repair & Service -->
+                <div class="col">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 p-4 desktop-card">
+                        <div class="icon-circle shadow-sm bg-warning-light rounded-circle d-flex align-items-center justify-content-center mb-4" style="width:60px;height:60px;">
+                            <i class="bi bi-briefcase text-warning-dark fs-4"></i>
+                        </div>
+                        <h4 class="fw-bold mb-2 fs-5">Repair & Service</h4>
+                        <p class="text-secondary fs-6 mb-4 lh-sm">Expert maintenance for all bike...</p>
+                        <button class="btn btn-warning w-100 mt-auto fw-bold py-2 rounded-3 text-dark">Book Now</button>
+                    </div>
+                </div>
+
+                <!-- Tyre Puncture -->
+                <div class="col">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 p-4 desktop-card">
+                        <div class="icon-circle shadow-sm bg-warning-light rounded-circle d-flex align-items-center justify-content-center mb-4" style="width:60px;height:60px;">
+                            <i class="bi bi-vinyl text-warning-dark fs-4"></i>
+                        </div>
+                        <h4 class="fw-bold mb-2 fs-5">Tyre Puncture<br>Service</h4>
+                        <p class="text-secondary fs-6 mb-4 lh-sm">On-spot flat tyre fixes within...</p>
+                        <button class="btn btn-warning w-100 mt-auto fw-bold py-2 rounded-3 text-dark">Book Now</button>
+                    </div>
+                </div>
+
+                <!-- Urgent Breakdown -->
+                <div class="col">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 p-4 desktop-card position-relative">
+                        <span class="badge bg-warning text-dark position-absolute top-0 end-0 mt-4 me-4 rounded-pill px-3 py-1 fw-bold tracking-wide" style="font-size:0.7rem;">FASTEST</span>
+                        <div class="icon-circle shadow-sm bg-warning-light rounded-circle d-flex align-items-center justify-content-center mb-4" style="width:60px;height:60px;">
+                            <i class="bi bi-lightning-charge text-warning-dark fs-4"></i>
+                        </div>
+                        <h4 class="fw-bold mb-2 fs-5 pe-4">Urgent Breakdown</h4>
+                        <p class="text-secondary fs-6 mb-4 lh-sm">Immediate roadside assistance...</p>
+                        <button class="btn btn-warning w-100 mt-auto fw-bold py-2 rounded-3 text-dark">Book Now</button>
+                    </div>
+                </div>
+
+                <!-- Washing & Polishing -->
+                <div class="col">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 p-4 desktop-card">
+                        <div class="icon-circle shadow-sm bg-warning-light rounded-circle d-flex align-items-center justify-content-center mb-4" style="width:60px;height:60px;">
+                            <i class="bi bi-droplet-half text-warning-dark fs-4"></i>
+                        </div>
+                        <h4 class="fw-bold mb-2 fs-5">Washing & Polishing</h4>
+                        <p class="text-secondary fs-6 mb-4 lh-sm">Keep your ride shining like new.</p>
+                        <button class="btn btn-warning w-100 mt-auto fw-bold py-2 rounded-3 text-dark">Book Now</button>
+                    </div>
+                </div>
+
+                <!-- Engine Services -->
+                <div class="col">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 p-4 desktop-card">
+                        <div class="icon-circle shadow-sm bg-warning-light rounded-circle d-flex align-items-center justify-content-center mb-4" style="width:60px;height:60px;">
+                            <i class="bi bi-gear-fill text-warning-dark fs-4"></i>
+                        </div>
+                        <h4 class="fw-bold mb-2 fs-5">Engine Services</h4>
+                        <p class="text-secondary fs-6 mb-4 lh-sm">Performance tuning and deep...</p>
+                        <button class="btn btn-warning w-100 mt-auto fw-bold py-2 rounded-3 text-dark">Book Now</button>
+                    </div>
+                </div>
+
+                <!-- Complete Renewal -->
+                <div class="col">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 p-4 desktop-card">
+                        <div class="icon-circle shadow-sm bg-warning-light rounded-circle d-flex align-items-center justify-content-center mb-4" style="width:60px;height:60px;">
+                            <i class="bi bi-bicycle text-warning-dark fs-4"></i>
+                        </div>
+                        <h4 class="fw-bold mb-2 fs-5">Complete Renewal</h4>
+                        <p class="text-secondary fs-6 mb-4 lh-sm">Full bike restoration and upgrades.</p>
+                        <button class="btn btn-warning w-100 mt-auto fw-bold py-2 rounded-3 text-dark">Book Now</button>
+                    </div>
+                </div>
+
+                <!-- Sell Scrap Bike -->
+                <div class="col">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 p-4 desktop-card">
+                        <div class="icon-circle shadow-sm bg-warning-light rounded-circle d-flex align-items-center justify-content-center mb-4" style="width:60px;height:60px;">
+                            <i class="bi bi-trash-fill text-warning-dark fs-4"></i>
+                        </div>
+                        <h4 class="fw-bold mb-2 fs-5">Sell Scrap Bike</h4>
+                        <p class="text-secondary fs-6 mb-4 lh-sm">Best market value for your old bikes.</p>
+                        <button class="btn btn-warning w-100 mt-auto fw-bold py-2 rounded-3 text-dark">Book Now</button>
+                    </div>
+                </div>
+
+                <!-- Membership -->
+                <div class="col">
+                    <div class="card h-100 border-0 shadow-lg rounded-4 p-0 bg-dark text-white overflow-hidden position-relative desktop-card">
+                        <div class="position-absolute top-0 start-0 w-100 h-100" style="background: url('https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=800&q=80') center/cover; opacity: 0.2;"></div>
+                        <div class="position-absolute top-0 start-0 w-100 h-100 bg-gradient-dark"></div>
+                        <div class="position-relative z-1 p-4 d-flex flex-column h-100">
+                            <div class="mb-5">
+                                <span class="badge bg-warning text-dark rounded-pill px-3 py-1 fw-bold tracking-wide" style="font-size:0.7rem;">NEW</span>
+                            </div>
+                            <h4 class="fw-bold mb-2 fs-3">Membership</h4>
+                            <p class="text-white-50 fs-6 mb-4 lh-sm pe-4">Unlimited service & free towing for premium members.</p>
+                            <button class="btn btn-light w-100 mt-auto fw-bold py-2 rounded-3 text-dark">Join Now</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Desktop Footer -->
+        <footer class="bg-white border-top py-4 mt-5">
+            <div class="container d-flex justify-content-between align-items-center text-muted" style="font-size:0.85rem;">
+                <div class="fw-bold fs-5 text-dark fst-italic">BikeBros</div>
+                <div>© 2024 BIKEBROS PERFORMANCE. ALL RIGHTS RESERVED.</div>
+                <div class="d-flex gap-5">
+                    <a href="#" class="text-secondary text-decoration-none fw-bold tracking-wide">CONTACT</a>
+                    <a href="#" class="text-secondary text-decoration-none fw-bold tracking-wide">PRIVACY</a>
+                    <a href="#" class="text-secondary text-decoration-none fw-bold tracking-wide">TERMS</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+    <!-- ============================================== -->
+    <!-- MOBILE VIEW (Visible on lg-down only)          -->
+    <!-- ============================================== -->
+    <div class="d-block d-lg-none mobile-wrapper pb-5 mb-5">
+        
+        <!-- Mobile Drawer Overlay -->
+        <div class="drawer-overlay" id="drawerOverlay"></div>
+
+        <!-- Mobile Drawer Menu -->
+        <div class="mobile-drawer d-flex flex-column" id="mobileDrawer">
+            <div class="p-4 border-bottom d-flex align-items-center justify-content-between bg-white">
+                <a class="navbar-brand fw-bold fs-3 fst-italic text-dark mb-0" href="#">BikeBros</a>
+                <button class="btn-close text-dark" id="closeDrawer"></button>
+            </div>
+            
+            <div class="p-4 bg-light flex-shrink-0 border-bottom">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="profile-circle" style="width: 50px; height: 50px; min-width: 50px; min-height: 50px;">
+                        <img src="https://i.pravatar.cc/150?img=11" alt="Profile">
+                    </div>
+                    <div>
+                        <div class="fw-bold fs-5 text-dark">Alex Johnson</div>
+                        <div class="text-secondary fs-sm" style="font-size: 0.8rem;">Premium Member</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 flex-grow-1 overflow-auto bg-white">
+                <ul class="nav flex-column gap-4 fs-5">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark fw-bold px-0 d-flex gap-3 align-items-center" href="#">
+                            <i class="bi bi-house-door text-warning"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-secondary fw-medium px-0 d-flex gap-3 align-items-center" href="#">
+                            <i class="bi bi-wrench"></i> Services
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-secondary fw-medium px-0 d-flex gap-3 align-items-center" href="#">
+                            <i class="bi bi-calendar2-check"></i> My Bookings
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-secondary fw-medium px-0 d-flex gap-3 align-items-center" href="#">
+                            <i class="bi bi-question-circle"></i> Support
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="p-4 border-top bg-white">
+                <button class="btn btn-outline-danger w-100 fw-bold py-2 rounded-3">Log Out</button>
+            </div>
+        </div>
+
+        <!-- Mobile Top Navbar -->
+        <div class="d-flex justify-content-between align-items-center p-3 bg-white position-sticky top-0 shadow-sm border-bottom z-2">
+            <button class="btn p-0 border-0 text-dark" id="mobileMenuBtn">
+                <i class="bi bi-list"></i>
+            </button>
+            <h5 class="fw-bold m-0 fs-5 text-dark">Select a Service</h5>
+            <div class="profile-circle" style="width: 40px; height: 40px; min-width: 40px; min-height: 40px;">
+                <img src="https://i.pravatar.cc/150?img=11" alt="Profile">
+            </div>
+        </div>
+
+        <!-- Mobile Welcome Header -->
+        <div class="px-3 pt-4 pb-2 bg-white">
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <div class="text-secondary text-uppercase fw-semibold mb-1 tracking-wide" style="letter-spacing: 1.5px; font-size: 0.75rem;">WELCOME BACK,</div>
+                    <div class="fw-bold text-dark lh-sm" style="font-size: 1.3rem;">Alex Johnson</div>
+                </div>
+                <div class="bg-warning bg-opacity-25 rounded-pill px-3 py-1 d-flex gap-2 align-items-center">
+                    <i class="bi bi-geo-alt text-warning-dark" style="font-size:1rem;"></i>
+                    <span class="text-dark fw-bold" style="font-size:0.85rem;">New York, NY</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Cards Grid -->
+        <div class="px-3 py-4 mobile-bg-light">
+            <div class="row row-cols-2 g-3">
+                
+                <!-- Repair -->
+                <div class="col">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 p-3 text-center d-flex flex-column align-items-center mobile-card">
+                        <div class="icon-circle bg-warning-light rounded-circle d-flex align-items-center justify-content-center mb-3 mt-2" style="width:55px;height:55px;">
+                            <i class="bi bi-wrench-adjustable fs-4 text-dark"></i>
+                        </div>
+                        <h6 class="fw-bold mb-3 fs-sm" style="font-size:0.95rem;">Repair & Service</h6>
+                        <button class="btn btn-warning w-100 fw-bold rounded-pill py-1 mt-auto fs-sm text-dark">Book Now</button>
+                    </div>
+                </div>
+
+                <!-- Tyre -->
+                <div class="col">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 p-3 text-center d-flex flex-column align-items-center mobile-card">
+                        <div class="icon-circle bg-warning-light rounded-circle d-flex align-items-center justify-content-center mb-3 mt-2" style="width:55px;height:55px;">
+                            <i class="bi bi-speedometer fs-4 text-dark"></i>
+                        </div>
+                        <h6 class="fw-bold mb-3 fs-sm" style="font-size:0.95rem;">Tyre Puncture</h6>
+                        <button class="btn btn-warning w-100 fw-bold rounded-pill py-1 mt-auto fs-sm text-dark">Book Now</button>
+                    </div>
+                </div>
+
+                <!-- Urgent Breakdown -->
+                <div class="col">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 p-3 text-center d-flex flex-column align-items-center position-relative overflow-hidden mobile-card">
+                        <div class="mobile-ribbon fw-bold shadow-sm">FASTEST</div>
+                        <div class="icon-circle bg-warning-light rounded-circle d-flex align-items-center justify-content-center mb-3 mt-2" style="width:55px;height:55px; z-index:1;">
+                            <i class="bi bi-asterisk fs-4 text-dark"></i>
+                        </div>
+                        <h6 class="fw-bold mb-3 fs-sm position-relative z-1" style="font-size:0.95rem;">Urgent Breakdown</h6>
+                        <button class="btn btn-warning w-100 fw-bold rounded-pill py-1 mt-auto fs-sm z-1 position-relative text-dark">Book Now</button>
+                    </div>
+                </div>
+
+                <!-- Washing -->
+                <div class="col">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 p-3 text-center d-flex flex-column align-items-center mobile-card">
+                        <div class="icon-circle bg-warning-light rounded-circle d-flex align-items-center justify-content-center mb-3 mt-2" style="width:55px;height:55px;">
+                            <i class="bi bi-droplet fs-4 text-dark"></i>
+                        </div>
+                        <h6 class="fw-bold mb-3 fs-sm" style="font-size:0.95rem;">Washing &<br>Polishing</h6>
+                        <button class="btn btn-warning w-100 fw-bold rounded-pill py-1 mt-auto fs-sm text-dark">Book Now</button>
+                    </div>
+                </div>
+
+                <!-- Engine -->
+                <div class="col">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 p-3 text-center d-flex flex-column align-items-center mobile-card">
+                        <div class="icon-circle bg-warning-light rounded-circle d-flex align-items-center justify-content-center mb-3 mt-2" style="width:55px;height:55px;">
+                            <i class="bi bi-sliders fs-4 text-dark"></i>
+                        </div>
+                        <h6 class="fw-bold mb-3 fs-sm" style="font-size:0.95rem;">Engine Services</h6>
+                        <button class="btn btn-warning w-100 fw-bold rounded-pill py-1 mt-auto fs-sm text-dark">Book Now</button>
+                    </div>
+                </div>
+
+                <!-- Complete Renewal -->
+                <div class="col">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 p-3 text-center d-flex flex-column align-items-center mobile-card">
+                        <div class="icon-circle bg-warning-light rounded-circle d-flex align-items-center justify-content-center mb-3 mt-2" style="width:55px;height:55px;">
+                            <i class="bi bi-arrow-repeat fs-4 text-dark"></i>
+                        </div>
+                        <h6 class="fw-bold mb-3 fs-sm" style="font-size:0.95rem;">Complete<br>Renewal</h6>
+                        <button class="btn btn-warning w-100 fw-bold rounded-pill py-1 mt-auto fs-sm text-dark">Book Now</button>
+                    </div>
+                </div>
+
+            </div>
+            
+            <!-- Sell Scrap Bike (Full Width Horizontal) -->
+            <div class="card border-0 shadow-sm rounded-4 p-3 mt-3 mobile-card">
+                <div class="d-flex gap-3 align-items-center justify-content-between">
+                    <div class="icon-circle bg-warning-light rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width:55px;height:55px;">
+                        <i class="bi bi-trash fs-4 text-dark"></i>
+                    </div>
+                    <h6 class="fw-bold mb-0 flex-grow-1" style="font-size:0.95rem;">Sell Scrap Bike</h6>
+                    <button class="btn btn-warning fw-bold rounded-pill px-4 py-2 fs-sm text-nowrap text-dark">Book Now</button>
+                </div>
+            </div>
+
+            <!-- Special Weekend Offer (Dark Banner) -->
+            <div class="card bg-dark text-white border-0 shadow-lg rounded-4 p-4 mt-3 position-relative overflow-hidden mb-2 mobile-card">
+                <i class="bi bi-bicycle position-absolute text-white" style="font-size: 14rem; right: -40px; bottom: -80px; opacity: 0.1; transform: rotate(-5deg);"></i>
+                <div class="position-relative z-1 pe-5">
+                    <h4 class="fw-bold mb-2">Special Weekend Offer</h4>
+                    <p class="text-white-50 fs-sm mb-4" style="font-size: 0.9rem;">20% off on Complete Renewal</p>
+                    <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold fs-sm tracking-wide">CODE: RIDE20</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Mobile Bottom Navbar -->
+        <div class="bg-white border-top position-fixed bottom-0 w-100 z-3 d-flex justify-content-around py-2 pt-3 shadow-lg">
+            <div class="nav-item d-flex flex-column align-items-center mobile-nav-active" style="cursor:pointer;" onclick="window.location.href='index.html'">
+                <div class="px-3 py-1 mb-1">
+                    <i class="bi bi-house-door-fill fs-5"></i>
+                </div>
+                <span class="tracking-wide" style="font-size:0.6rem; font-weight:800;">HOME</span>
+            </div>
+            <div class="nav-item d-flex flex-column align-items-center text-secondary opacity-75" style="cursor:pointer;">
+                <div class="px-3 py-1 mb-1">
+                    <i class="bi bi-bicycle fs-5"></i>
+                </div>
+                <span class="tracking-wide" style="font-size:0.6rem; font-weight:700;">SERVICES</span>
+            </div>
+            <div class="nav-item d-flex flex-column align-items-center text-secondary opacity-75" style="cursor:pointer;">
+                <div class="px-3 py-1 mb-1">
+                    <i class="bi bi-calendar4-week fs-5"></i>
+                </div>
+                <span class="tracking-wide" style="font-size:0.6rem; font-weight:700;">BOOKINGS</span>
+            </div>
+            <div class="nav-item d-flex flex-column align-items-center text-secondary opacity-75" style="cursor:pointer;">
+                <div class="px-3 py-1 mb-1">
+                    <i class="bi bi-question-circle fs-5"></i>
+                </div>
+                <span class="tracking-wide" style="font-size:0.6rem; font-weight:700;">SUPPORT</span>
+            </div>
+            <div class="nav-item d-flex flex-column align-items-center text-secondary opacity-75" style="cursor:pointer;">
+                <div class="px-3 py-1 mb-1">
+                    <i class="bi bi-person fs-5"></i>
+                </div>
+                <span class="tracking-wide" style="font-size:0.6rem; font-weight:700;">PROFILE</span>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

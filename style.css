@@ -1,0 +1,304 @@
+:root {
+    --primary: #FFC107;
+    --primary-hover: #e0a800;
+    --secondary: #FFFFFF;
+    --tertiary: #000000;
+    --neutral: #F2F2F2;
+    --bg-light: #FAFAFB;
+    --warning-light: #FFF8E1;
+    --warning-dark: #D48806;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-light);
+    color: #121212;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Utilities */
+.tracking-wide {
+    letter-spacing: 0.05em;
+}
+
+.bg-warning-light {
+    background-color: var(--warning-light);
+}
+
+.text-warning-dark {
+    color: var(--warning-dark);
+}
+
+.desktop-wrapper {
+    background-color: var(--bg-light);
+}
+
+.mobile-wrapper {
+    background-color: #FFFFFF;
+}
+.mobile-bg-light {
+    background-color: var(--bg-light);
+}
+
+/* Desktop Navbar */
+.desktop-nav-link {
+    transition: all 0.3s ease;
+    padding-bottom: 0.5rem;
+    position: relative;
+    color: #6c757d !important;
+}
+
+.desktop-nav-link:hover {
+    color: var(--tertiary) !important;
+}
+
+.desktop-nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: var(--primary);
+    transition: width 0.3s ease;
+}
+
+.desktop-nav-link:hover::after {
+    width: 100%;
+}
+
+.active-link::after {
+    width: 100% !important;
+}
+
+.active-link {
+    color: var(--tertiary) !important;
+}
+
+/* Profile Circle Fix */
+.profile-circle {
+    width: 45px;
+    height: 45px;
+    min-width: 45px;
+    min-height: 45px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.profile-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Mobile Toggle Stylish */
+#mobileMenuBtn {
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    border-radius: 8px;
+}
+
+#mobileMenuBtn:active {
+    background: rgba(0,0,0,0.05);
+}
+
+#mobileMenuBtn i {
+    font-size: 1.6rem;
+    color: var(--tertiary);
+}
+
+/* Desktop Cards */
+.desktop-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.02) !important;
+}
+
+.desktop-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05) !important;
+}
+
+/* Mobile Drawer */
+.mobile-drawer {
+    position: fixed;
+    top: 0;
+    left: -320px;
+    width: 300px;
+    max-width: 80vw;
+    height: 100vh;
+    background: white;
+    z-index: 1050;
+    transition: left 0.3s ease-in-out;
+    box-shadow: 5px 0 15px rgba(0,0,0,0.05);
+}
+
+.mobile-drawer.open {
+    left: 0;
+}
+
+.drawer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.4);
+    z-index: 1045;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.drawer-overlay.open {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Mobile Ribbon */
+.mobile-ribbon {
+    position: absolute;
+    top: 15px;
+    right: -35px;
+    background-color: #D32F2F;
+    color: white;
+    padding: 3px 40px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    transform: rotate(45deg);
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    letter-spacing: 1px;
+}
+
+/* Adjustments for custom icons and containers */
+.icon-circle {
+    aspect-ratio: 1;
+}
+
+.btn-warning {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    transition: background-color 0.2s ease;
+}
+
+.btn-warning:hover {
+    background-color: var(--primary-hover) !important;
+}
+
+.bg-gradient-dark {
+    background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.3));
+}
+
+/* Forms & Accordions for Contact Page */
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25);
+}
+
+.custom-accordion .accordion-button:not(.collapsed) {
+    color: var(--tertiary);
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.custom-accordion .accordion-button:focus {
+    box-shadow: none;
+    border-color: rgba(0,0,0,0.125);
+}
+
+.custom-accordion .accordion-button::after {
+    background-size: 1rem;
+}
+
+/* Dynamic FAQ Active State */
+.active-faq {
+    background-color: var(--warning-light) !important;
+    border-color: var(--primary) !important;
+}
+
+/* Mobile Bottom Nav Active */
+.mobile-nav-active i, .mobile-nav-active span {
+    color: var(--primary) !important;
+    font-weight: 800 !important;
+}
+
+/* Stepper Styles */
+.step-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #A0A0A0; /* upcoming state */
+    font-size: 0.9rem;
+}
+.step-circle {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    background-color: #EBEBEB;
+    color: #A0A0A0;
+}
+.step-item.completed {
+    color: #121212;
+    font-weight: 700;
+}
+.step-item.completed .step-circle {
+    background-color: #121212;
+    color: white;
+}
+.step-item.active {
+    color: #121212;
+    font-weight: 700;
+}
+.step-item.active .step-circle {
+    background-color: var(--primary);
+    color: #121212;
+}
+.step-divider {
+    flex-grow: 1;
+    height: 2px;
+    background-color: #F0F0F0;
+    margin: 0 1rem;
+}
+
+/* Time Slot Pills */
+.time-slot {
+    border: 1px solid #E0E0E0;
+    background-color: white;
+    color: #333;
+    cursor: pointer;
+    text-align: center;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+.time-slot.selected {
+    background-color: #121212;
+    color: white;
+    border-color: #121212;
+}
+
+/* Premium Shadow Utility */
+.premium-shadow {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05), 0 1px 8px rgba(0, 0, 0, 0.03) !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+

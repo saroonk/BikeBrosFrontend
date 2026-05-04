@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BikeBros - Book Your Service</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="style.css" rel="stylesheet">
+    <style>
+        .dashed-upload {
+            border: 2px dashed #E0E0E0;
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
+            background-color: #FAFAFB;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .dashed-upload:hover {
+            border-color: #FFC107;
+            background-color: #FFFDE7;
+        }
+        .map-placeholder {
+            height: 200px;
+            border-radius: 12px;
+            background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=800&q=80') center/cover;
+            position: relative;
+            margin-bottom: 12px;
+        }
+        .use-current-btn {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+        }
+        /* Overrides for mobile to keep inputs matching design */
+        input.form-control, textarea.form-control, select.form-control {
+            border-color: #EBEBEB;
+            padding: 12px 16px;
+        }
+        input.form-control:focus, textarea.form-control:focus {
+            box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25);
+            border-color: #FFC107;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================== -->
+    <!-- DESKTOP VIEW (Hidden on lg-down)               -->
+    <!-- ============================================== -->
+    <div class="d-none d-lg-block desktop-wrapper">
+        <!-- Desktop Navbar -->
+        <nav class="navbar navbar-expand-lg bg-white desktop-navbar py-3 sticky-top shadow-sm border-bottom">
+            <div class="container">
+                <a class="navbar-brand fw-bold fs-3 fst-italic text-dark mb-0" style="letter-spacing:-1px;" href="index.html">BikeBros</a>
+                
+                <div class="collapse navbar-collapse justify-content-center">
+                    <ul class="navbar-nav gap-5 bg-white">
+                        <li class="nav-item">
+                            <a class="nav-link fw-medium text-secondary desktop-nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active fw-bold text-dark desktop-nav-link active-link" href="service.html">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-medium text-secondary desktop-nav-link" href="#">My Bookings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-medium text-secondary desktop-nav-link" href="contact.html">Support</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="d-flex align-items-center gap-4">
+                    <button class="btn btn-warning fw-bold px-4 py-2 rounded-3 text-dark">Book Service</button>
+                    <!-- Profile Icon -->
+                    <div class="profile-circle" style="cursor: pointer;">
+                        <img src="https://i.pravatar.cc/150?img=11" alt="Profile">
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Desktop Main Content -->
+        <div class="container py-5">
+            <div class="mb-5">
+                <h1 class="fw-bold mb-2">Book Your Service</h1>
+                <p class="text-secondary fs-5">Tell us your issue and schedule a service at your convenience</p>
+            </div>
+
+            <div class="row g-5">
+                <!-- Left Column (Form) -->
+                <div class="col-lg-8">
+                    <!-- Stepper -->
+                    <div class="d-flex align-items-center justify-content-between mb-5 bg-white p-3 rounded-4 border shadow-sm">
+                        <div class="step-item completed">
+                            <div class="step-circle">1</div>
+                            <span>Service</span>
+                        </div>
+                        <div class="step-divider"></div>
+                        <div class="step-item active">
+                            <div class="step-circle">2</div>
+                            <span>Details</span>
+                        </div>
+                        <div class="step-divider"></div>
+                        <div class="step-item">
+                            <div class="step-circle">3</div>
+                            <span>Schedule</span>
+                        </div>
+                        <div class="step-divider"></div>
+                        <div class="step-item">
+                            <div class="step-circle">4</div>
+                            <span>Confirm</span>
+                        </div>
+                    </div>
+
+                    <!-- Form Container Card -->
+                    <div class="card border-0 premium-shadow rounded-4 p-4 p-lg-5 bg-white">
+                        <!-- Selected Service Row -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold text-dark">Selected Service</label>
+                            <div class="d-flex justify-content-between align-items-center border rounded-3 p-3 bg-white">
+                                <div class="d-flex align-items-center gap-2">
+                                    <i class="bi bi-wrench-adjustable text-warning fs-5"></i>
+                                    <span class="fw-bold fs-5 selected-service-text">Repair & Service</span>
+                                </div>
+                                <button class="btn btn-link text-warning fw-bold text-decoration-none p-0" data-bs-toggle="modal" data-bs-target="#serviceSelectModal">Change</button>
+                            </div>
+                        </div>
+
+                        <!-- Describe Issue -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold text-dark">Describe your issue</label>
+                            <textarea class="form-control" rows="4" placeholder="e.g., Brakes are squeaking, chain needs lubrication..."></textarea>
+                        </div>
+
+                        <!-- Upload Photos -->
+                        <div class="mb-5">
+                            <label class="form-label fw-bold text-dark">Upload Photos (Optional)</label>
+                            <div class="dashed-upload">
+                                <i class="bi bi-cloud-arrow-up text-secondary fs-2 mb-2"></i>
+                                <p class="text-secondary m-0">Drag & drop files here, or <span class="text-warning fw-bold">browse</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Location -->
+                        <div class="mb-5">
+                            <label class="form-label fw-bold text-dark">Service Location</label>
+                            <div class="map-placeholder">
+                                <button class="btn btn-dark fw-bold rounded-pill use-current-btn d-flex align-items-center gap-2 px-3 py-2 fs-sm">
+                                    <i class="bi bi-crosshair"></i> Use Current Location
+                                </button>
+                            </div>
+                            <input type="text" class="form-control" placeholder="123 Main St, Anytown, CA 90210">
+                        </div>
+
+                        <!-- Date & Time -->
+                        <div class="row g-4 mb-5">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-dark">Select Date</label>
+                                <input type="date" class="form-control" value="2023-11-15">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-dark">Select Time</label>
+                                <div class="d-flex flex-column gap-2 time-slot-container">
+                                    <div class="time-slot selected">10:00 AM - 1:00 PM</div>
+                                    <div class="time-slot">2:00 PM - 5:00 PM</div>
+                                    <div class="time-slot">5:00 PM - 8:00 PM</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-warning w-100 fw-bold py-3 rounded-3 text-dark fs-5">Confirm Booking Details</button>
+                    </div>
+                </div>
+
+                <!-- Right Column (Summary & Trust Badges) -->
+                <div class="col-lg-4">
+                    <!-- Summary Card -->
+                    <div class="card border border-light shadow-sm rounded-4 p-4 mb-4 bg-white">
+                        <h4 class="fw-bold mb-4">Summary</h4>
+                        
+                        <div class="d-flex justify-content-between mb-3">
+                            <span class="text-secondary">Service</span>
+                            <span class="fw-bold text-dark selected-service-text text-end" style="max-width: 150px;">Repair & Service</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3 border-top pt-3 border-light">
+                            <span class="text-secondary">Date</span>
+                            <span class="fw-bold text-dark">Pending</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3 border-top pt-3 border-light">
+                            <span class="text-secondary">Time</span>
+                            <span class="fw-bold text-dark">10:00 AM - 1:00 PM</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-4 border-top pt-3 border-light">
+                            <span class="text-secondary">Estimated Cost</span>
+                            <span class="fw-bold text-dark">From $45</span>
+                        </div>
+                        
+                        <button class="btn btn-outline-dark w-100 fw-bold py-2 rounded-3 text-secondary">Proceed to Confirm</button>
+                    </div>
+
+                    <!-- Features -->
+                    <div class="bg-white premium-shadow rounded-4 p-4 mt-4">
+                        <div class="d-flex gap-3 mb-3">
+                            <div class="icon-circle bg-warning rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width:30px;height:30px;">
+                                <i class="bi bi-patch-check-fill text-dark" style="font-size:0.9rem;"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1 fs-sm">Verified Mechanics</h6>
+                                <p class="text-secondary mb-0" style="font-size:0.75rem;">Expert, background-checked pros.</p>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-3 mb-3">
+                            <div class="icon-circle bg-warning rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width:30px;height:30px;">
+                                <i class="bi bi-door-open-fill text-dark" style="font-size:0.9rem;"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1 fs-sm">Doorstep Service</h6>
+                                <p class="text-secondary mb-0" style="font-size:0.75rem;">We come to your location.</p>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-3">
+                            <div class="icon-circle bg-warning rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width:30px;height:30px;">
+                                <i class="bi bi-cash-coin text-dark" style="font-size:0.9rem;"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1 fs-sm">Transparent Pricing</h6>
+                                <p class="text-secondary mb-0" style="font-size:0.75rem;">No hidden fees, ever.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Desktop Footer -->
+        <footer class="bg-white border-top py-4 mt-5">
+            <div class="container d-flex justify-content-between align-items-center text-muted" style="font-size:0.85rem;">
+                <div class="fw-bold fs-5 text-dark fst-italic">BikeBros</div>
+                <div>© 2024 BIKEBROS PERFORMANCE. ALL RIGHTS RESERVED.</div>
+                <div class="d-flex gap-5">
+                    <a href="#" class="text-secondary text-decoration-none fw-bold tracking-wide">CONTACT</a>
+                    <a href="#" class="text-secondary text-decoration-none fw-bold tracking-wide">PRIVACY</a>
+                    <a href="#" class="text-secondary text-decoration-none fw-bold tracking-wide">TERMS</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+    <!-- ============================================== -->
+    <!-- MOBILE VIEW (Visible on lg-down only)          -->
+    <!-- ============================================== -->
+    <div class="d-block d-lg-none mobile-wrapper pb-5 mb-5 bg-white">
+        
+        <!-- Mobile Header -->
+        <div class="d-flex align-items-center p-3 bg-white position-sticky top-0 shadow-sm border-bottom z-3">
+            <button class="btn p-0 border-0 text-dark me-3" onclick="window.history.back()">
+                <i class="bi bi-arrow-left fs-4"></i>
+            </button>
+            <h5 class="fw-bold m-0 flex-grow-1 text-center fs-5 text-uppercase tracking-wide" style="letter-spacing: 1px;">Book Service</h5>
+            <div style="width:24px;"></div> <!-- spacer -->
+        </div>
+
+        <!-- Mobile Stepper -->
+        <div class="px-3 py-3 border-bottom shadow-sm bg-white mb-3">
+            <div class="d-flex align-items-center justify-content-between px-2">
+                <div class="d-flex flex-column align-items-center gap-1 step-item completed">
+                    <div class="step-circle">1</div>
+                    <span style="font-size: 0.65rem;">Service</span>
+                </div>
+                <div class="step-divider" style="margin: 0px 5px; margin-top:-15px;"></div>
+                <div class="d-flex flex-column align-items-center gap-1 step-item active">
+                    <div class="step-circle">2</div>
+                    <span style="font-size: 0.65rem;">Details</span>
+                </div>
+                <div class="step-divider" style="margin: 0px 5px; margin-top:-15px;"></div>
+                <div class="d-flex flex-column align-items-center gap-1 step-item">
+                    <div class="step-circle">3</div>
+                    <span style="font-size: 0.65rem;">Schedule</span>
+                </div>
+                <div class="step-divider" style="margin: 0px 5px; margin-top:-15px;"></div>
+                <div class="d-flex flex-column align-items-center gap-1 step-item">
+                    <div class="step-circle">4</div>
+                    <span style="font-size: 0.65rem;">Confirm</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Content -->
+        <div class="px-3 pb-5 mb-4">
+            
+            <!-- Selected Service -->
+            <div class="card border rounded-4 p-3 mb-4 shadow-sm" style="background-color: #FAFAFB;">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="bg-dark rounded-3 d-flex align-items-center justify-content-center" style="width:40px; height:40px;">
+                            <i class="bi bi-wrench-adjustable text-white fs-5"></i>
+                        </div>
+                        <div>
+                            <div class="text-secondary" style="font-size: 0.7rem; font-weight: 600;">Selected Service</div>
+                            <div class="fw-bold text-dark fs-sm m-0 selected-service-text">Repair & Service</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-link text-dark fw-bold text-decoration-underline p-0 fs-sm" data-bs-toggle="modal" data-bs-target="#serviceSelectModal">Change</button>
+                </div>
+            </div>
+
+            <!-- Describe Issue -->
+            <div class="mb-4">
+                <label class="form-label fw-bold text-dark fs-sm mb-1">Describe the issue</label>
+                <textarea class="form-control rounded-3" rows="3" placeholder="E.g., Brakes are squeaking, chain needs lubrication..."></textarea>
+            </div>
+
+            <!-- Add Photos -->
+            <div class="mb-4">
+                <label class="form-label fw-bold text-dark fs-sm mb-1">Add Photos (Optional)</label>
+                <div class="dashed-upload py-4 bg-white" style="border-width: 1px;">
+                    <i class="bi bi-camera text-secondary fs-3 mb-2 d-block"></i>
+                    <p class="text-secondary m-0 fs-sm">Tap to upload photos of the issue</p>
+                </div>
+            </div>
+
+            <!-- Service Location -->
+            <div class="mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h5 class="fw-bold text-dark m-0">Service Location</h5>
+                    <button class="btn btn-link text-dark fw-bold text-decoration-none p-0 d-flex align-items-center gap-1" style="font-size:0.75rem;">
+                        <i class="bi bi-crosshair text-warning"></i> Use Current
+                    </button>
+                </div>
+                <div class="mb-2 position-relative rounded-4 overflow-hidden" style="height: 120px;">
+                    <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=600&q=80" alt="Map Route" style="width:100%; height:100%; object-fit:cover; opacity: 0.6;">
+                    <div class="position-absolute top-50 start-50 translate-middle">
+                        <i class="bi bi-geo-alt-fill text-primary" style="font-size: 2.5rem; text-shadow: 0px 4px 10px rgba(0,0,0,0.3);"></i>
+                    </div>
+                </div>
+                <p class="text-secondary fs-sm m-0">123 Main St, Anytown, CA 90210</p>
+            </div>
+
+            <!-- Select Schedule -->
+            <div class="mb-5">
+                <h5 class="fw-bold text-dark mb-3">Select Schedule</h5>
+                
+                <label class="form-label text-secondary fs-sm mb-1" style="font-size:0.7rem;">Date</label>
+                <input type="date" class="form-control rounded-3 mb-3 bg-white border" value="2023-11-15">
+
+                <label class="form-label text-secondary fs-sm mb-1" style="font-size:0.7rem;">Time Slots</label>
+                <div class="row g-2 time-slot-container">
+                    <div class="col-4">
+                        <div class="time-slot px-1 py-2" style="font-size: 0.7rem;">10am - 1pm</div>
+                    </div>
+                    <div class="col-4">
+                        <div class="time-slot px-1 py-2 selected position-relative" style="font-size: 0.7rem;">
+                            2pm - 5pm
+                            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-warning border border-light rounded-circle"></span>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="time-slot px-1 py-2" style="font-size: 0.7rem;">5pm - 8pm</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Sticky Bottom CTA -->
+        <div class="position-fixed bottom-0 w-100 bg-white p-3 z-3 border-top shadow-lg">
+            <button class="btn btn-warning w-100 fw-bold py-3 rounded-pill text-dark d-flex justify-content-center align-items-center gap-2">
+                CONFIRM BOOKING <i class="bi bi-arrow-right"></i>
+            </button>
+        </div>
+        
+    </div>
+
+    <!-- Service Selection Modal -->
+    <div class="modal fade" id="serviceSelectModal" tabindex="-1" aria-labelledby="serviceModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 rounded-4 shadow-lg">
+          <div class="modal-header border-bottom-0 pb-0">
+            <h5 class="modal-title fw-bold" id="serviceModalLabel">Select a Service</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="list-group list-group-flush gap-2">
+                <!-- Service Options inside Modal -->
+                <button type="button" class="list-group-item list-group-item-action rounded-3 border d-flex align-items-center gap-3 p-3 service-modal-option" data-service-name="Repair & Service">
+                    <i class="bi bi-wrench-adjustable text-warning fs-4"></i>
+                    <span class="fw-bold">Repair & Service</span>
+                </button>
+                <button type="button" class="list-group-item list-group-item-action rounded-3 border d-flex align-items-center gap-3 p-3 service-modal-option" data-service-name="Tyre Puncture">
+                    <i class="bi bi-vinyl text-warning fs-4"></i>
+                    <span class="fw-bold">Tyre Puncture</span>
+                </button>
+                <button type="button" class="list-group-item list-group-item-action rounded-3 border d-flex align-items-center gap-3 p-3 service-modal-option" data-service-name="Urgent Breakdown">
+                    <i class="bi bi-asterisk text-warning fs-4"></i>
+                    <span class="fw-bold">Urgent Breakdown</span>
+                </button>
+                <button type="button" class="list-group-item list-group-item-action rounded-3 border d-flex align-items-center gap-3 p-3 service-modal-option" data-service-name="Washing & Polishing">
+                    <i class="bi bi-droplet-half text-warning fs-4"></i>
+                    <span class="fw-bold">Washing & Polishing</span>
+                </button>
+                <button type="button" class="list-group-item list-group-item-action rounded-3 border d-flex align-items-center gap-3 p-3 service-modal-option" data-service-name="Engine Services">
+                    <i class="bi bi-gear-fill text-warning fs-4"></i>
+                    <span class="fw-bold">Engine Services</span>
+                </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Time slot selection logic
+            const timeSlotContainers = document.querySelectorAll('.time-slot-container');
+            timeSlotContainers.forEach(container => {
+                const slots = container.querySelectorAll('.time-slot');
+                slots.forEach(slot => {
+                    slot.addEventListener('click', () => {
+                        slots.forEach(s => {
+                            s.classList.remove('selected');
+                            // Remove mobile warning dot if it exists
+                            const dot = s.querySelector('.bg-warning.rounded-circle');
+                            if(dot) dot.remove();
+                        });
+                        slot.classList.add('selected');
+                        
+                        // If we are in mobile layout (has col-4 parents sometimes), add the dot
+                        if(slot.parentElement.classList.contains('col-4')) {
+                            slot.classList.add('position-relative');
+                            slot.insertAdjacentHTML('beforeend', '<span class="position-absolute top-0 start-100 translate-middle p-1 bg-warning border border-light rounded-circle"></span>');
+                        }
+                    });
+                });
+            });
+
+            // Service Modal Selection logic
+            const modalOptions = document.querySelectorAll('.service-modal-option');
+            const selectedServiceTexts = document.querySelectorAll('.selected-service-text');
+            
+            modalOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    const selectedName = option.getAttribute('data-service-name');
+                    
+                    // Update all places showing the selected service name
+                    selectedServiceTexts.forEach(el => {
+                        el.textContent = selectedName;
+                    });
+
+                    // Highlight the chosen option inside modal
+                    modalOptions.forEach(opt => {
+                        opt.classList.remove('bg-warning', 'bg-opacity-10', 'border-warning');
+                    });
+                    option.classList.add('bg-warning', 'bg-opacity-10', 'border-warning');
+
+                    // Close the modal
+                    const modalElement = document.getElementById('serviceSelectModal');
+                    const modalInstance = bootstrap.Modal.getInstance(modalElement);
+                    if (modalInstance) {
+                        modalInstance.hide();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
